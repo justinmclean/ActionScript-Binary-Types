@@ -163,6 +163,7 @@ package com.classsoftware.binary {
 		
 		/**
 		 * Decrements the value of a Binary type by one.
+		 * @return The instance of the modified binary type.
 		 */
 		public function dec():* {
 			value = _value - 1;		
@@ -171,6 +172,7 @@ package com.classsoftware.binary {
 		
 		/**
 		 * Increments the value of a Binary type by one.
+		 * @return The instance of the modified binary type.
 		 */
 		public function inc():* {
 			value = _value + 1;			
