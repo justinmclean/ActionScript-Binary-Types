@@ -38,23 +38,5 @@ package com.classsoftware.binary {
 		public function Byte(value:int = 0) {
 			super(8, value);
 		}
-		
-		/**
-		 * Decrements the value of a Byte by one.
-		 * Pubic type safe version of parent class decInternal.
-		 * @return The new value.
-		 */
-		public function dec():Byte {
-			return decInternal() as Byte;
-		}
-		
-		/**
-		 * Increments the value of a Byte by one.
-		 * Pubic type safe version of parent class decInternal.
-		 * @return The new value.
-		 */
-		public function inc():Byte {
-			return incInternal() as Byte;
-		}
 	}
 }

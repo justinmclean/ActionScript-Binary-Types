@@ -31,22 +31,27 @@ package com.classsoftware.binary {
 	 */
 	public class Binary implements IBinary {
 		
+		private var _maxValue:int = 0;
+		private var _noBits:int = 0;
+		private var _value:int = 0;
+		
 		/**
 		 * Creates a Binary type and optionally sets it value.
 		 * @param value Value to set Binary value to.
 		 */
 		public function Binary(noBits:int = 0, value:int = 0) {
-			if (noBits > 30) {
-				throw('Class only supports bit lengths up to 30 bits');
-			}
+			checkMaxBits(noBits);
 			_noBits = noBits;
 			_maxValue = (1 << _noBits) - 1;
 			this.value = value; // just in case value is over maximum
 		}
 
-		private var _maxValue:int = 0;
-		private var _noBits:int = 0;
-		private var _value:int = 0;
+		private function checkMaxBits(noBits:int):void
+		{
+			if (noBits > 30) {
+				throw('Class only supports bit lengths up to 30 bits');
+			}
+		}
 		
 		/**
 		 * Clears a bit in a Binary type.
@@ -158,21 +163,17 @@ package com.classsoftware.binary {
 		
 		/**
 		 * Decrements the value of a Binary type by one.
-		 * Called by dec method of sub classes.
-		 * @return The new value.
 		 */
-		protected function decInternal():IBinary {
-			value = _value - 1;
+		public function dec():* {
+			value = _value - 1;		
 			return this;
 		}
 		
 		/**
 		 * Increments the value of a Binary type by one.
-		 * Called by inc method of sub classes.
-		 * @return The new value.
 		 */
-		protected function incInternal():IBinary {
-			value = _value + 1;
+		public function inc():* {
+			value = _value + 1;			
 			return this;
 		}	
 		
@@ -188,6 +189,6 @@ package com.classsoftware.binary {
 			}
 			
 			return textmem;
-		}		
+		}	
 	}
 }

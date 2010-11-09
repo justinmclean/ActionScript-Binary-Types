@@ -45,7 +45,9 @@ package com.classsoftware.binary
 	public interface IBinary
 	{
 		function clearBit(bit:int):void;
+		function dec():*;
 		function getBit(bit:int):Bit;
+		function inc():*;
 		function isBitSet(bit:int):Boolean;
 		function get maxValue():int;
 		function get noBits():int;

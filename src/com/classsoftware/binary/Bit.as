@@ -58,6 +58,8 @@ package com.classsoftware.binary
 
 		private static var _created:Boolean = false;
 
+		private var _value:Boolean = false; // TODO check if boolean or int is faster
+		
 		/*
 		 * Static code block this is executed before the constructor but after any static properties have been created.
 		 * We can use this to make a constructor that throws an error at runtime if it is called.
@@ -84,8 +86,6 @@ package com.classsoftware.binary
 			}
 			_value = value;
 		}
-		
-		private var _value:Boolean = false; // TODO check if boolean or int is faster
 
 		/**
 		 * Converts a Bit to a Boolean.

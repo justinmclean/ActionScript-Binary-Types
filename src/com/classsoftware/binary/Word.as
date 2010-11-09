@@ -41,27 +41,11 @@ package com.classsoftware.binary {
 		}
 		
 		/**
-		 * Decrements the value of a Word by one.
-		 * @return The new value.
-		 */
-		public function dec():Word {
-			return decInternal() as Word;
-		}
-		
-		/**
 		 * Returns the high Byte from a Word.
 		 * @return The high Byte.
 		 */
 		public function highByte():Byte {
 			return new Byte(value >> 8);
-		}
-		
-		/**
-		 * Increments the value of a Word by one.
-		 * @return The new value.
-		 */
-		public function inc():Word {
-			return incInternal() as Word;
 		}
 		
 		/**

@@ -38,21 +38,5 @@ package com.classsoftware.binary {
 		public function Nibble(value:int = 0) {
 			super(4, value);
 		}
-		
-		/**
-		 * Decrements the value of a Byte by one.
-		 * @return The new value.
-		 */
-		public function dec():Nibble {
-			return decInternal() as Nibble;
-		}
-		
-		/**
-		 * Increments the value of a Nibble by one.
-		 * @return The new value.
-		 */
-		public function inc():Nibble {
-			return incInternal() as Nibble;
-		}
 	}
 }
