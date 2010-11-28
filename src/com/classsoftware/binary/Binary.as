@@ -31,9 +31,10 @@ package com.classsoftware.binary {
 	 */
 	public class Binary implements IBinary {
 		
-		private var _maxValue:int = 0;
+		private static const MAXBITS:Number = 32;
+		private var _maxValue:uint = 0; // int dosn't support 32 bit positive numbers
 		private var _noBits:int = 0;
-		private var _value:int = 0;
+		private var _value:uint = 0;
 		
 		/**
 		 * Creates a Binary type and optionally sets it value.
@@ -42,14 +43,17 @@ package com.classsoftware.binary {
 		public function Binary(noBits:int = 0, value:int = 0) {
 			checkMaxBits(noBits);
 			_noBits = noBits;
-			_maxValue = (1 << _noBits) - 1;
+			_maxValue = (1 << _noBits) - 1; // works for bit lengths up to 31
+			if (_noBits == 32) {
+				_maxValue = uint(-1); // for overflow when bit length is 32
+			}
 			this.value = value; // just in case value is over maximum
 		}
 
 		private function checkMaxBits(noBits:int):void
 		{
-			if (noBits > 30) {
-				throw('Class only supports bit lengths up to 30 bits');
+			if (noBits > MAXBITS) {
+				throw('Class only supports bit lengths up to ' + MAXBITS.toString() +' bits');
 			}
 		}
 		
@@ -68,8 +72,9 @@ package com.classsoftware.binary {
 		 */
 		public function getBit(bit:int):Bit {
 			var result:Bit;
+			var mask:uint = 1 << bit;
 			
-			if (_value & (1 << bit)) {
+			if (_value & mask) {
 				result = Bit.ONE;
 			} else {
 				result = Bit.ZERO;
@@ -85,8 +90,9 @@ package com.classsoftware.binary {
 		 */
 		public function isBitSet(bit:int):Boolean {
 			var result:Boolean;
+			var mask:uint = 1 << bit;
 			
-			if (_value & (1 << bit)) {
+			if (_value & mask) {
 				result = true;
 			} else {
 				result = false;
@@ -99,7 +105,7 @@ package com.classsoftware.binary {
 		 * The maximum value of a Binary type.
 		 * @return The maximum value.
 		 */
-		public function get maxValue():int
+		public function get maxValue():uint
 		{
 			return _maxValue;
 		}
@@ -118,7 +124,13 @@ package com.classsoftware.binary {
 		 * @param bit Bit to set.
 		 */
 		public function setBit(bit:int):void {
-			_value |= (1 << bit);
+			if (bit > _noBits) {
+				return;
+			}
+			
+			var mask:uint = 1 << bit;
+			
+			_value |= mask;
 		}
 
 		/**
@@ -132,7 +144,7 @@ package com.classsoftware.binary {
 				bits = _noBits;
 			}
 			
-			var neg:int = 1 << (bits - 1);
+			var neg:uint = 1 << (bits - 1);
 			var dec:int = 0;
 
 			if (_value >= neg) {
@@ -149,7 +161,7 @@ package com.classsoftware.binary {
 		 * Return the value of a Binary type.
 		 * @return Value of the Binary type.
 		 */
-		public function get value():int {
+		public function get value():uint {
 			return _value;
 		}
 
@@ -157,7 +169,7 @@ package com.classsoftware.binary {
 		 * Sets the value of a Binary type.
 		 * @param value Value to set the Binary type to.
 		 */
-		public function set value(value:int):void {
+		public function set value(value:uint):void {
 			_value = value & maxValue;
 		}
 		

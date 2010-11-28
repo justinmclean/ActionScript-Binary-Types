@@ -49,12 +49,12 @@ package com.classsoftware.binary
 		function getBit(bit:int):Bit;
 		function inc():*;
 		function isBitSet(bit:int):Boolean;
-		function get maxValue():int;
+		function get maxValue():uint;
 		function get noBits():int;
 		function setBit(bit:int):void;
 		function toDec(bits:int = -1):int;
 		function toString():String;
-		function get value():int;
-		function set value(value:int):void;
+		function get value():uint;
+		function set value(value:uint):void;
 	}
 }
