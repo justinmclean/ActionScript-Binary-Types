@@ -50,5 +50,16 @@ package flexUnitTests
 			byte.dec();
 			Assert.assertEquals(byte.value, 0x00);	
 		}
+		
+		[Test]
+		public function checkWrap():void {
+			var byte:Byte = new Byte(0);
+			byte.dec();
+			Assert.assertEquals(byte.value, 0xFF);	
+			
+			byte.value = 0xFF;
+			byte.inc();
+			Assert.assertEquals(byte.value, 0x00);	
+		}		
 	}
 }
