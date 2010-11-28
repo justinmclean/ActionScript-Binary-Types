@@ -40,13 +40,17 @@ package flexUnitTests
 			
 			// tests on no bits and max value
 			Assert.assertEquals(binary.noBits, nobits);
-			Assert.assertEquals(binary.maxValue, (1 << nobits) - 1);
+			var answer:uint = (1 << nobits) - 1;
+			if (nobits == 32) {
+				answer = uint(-1);
+			}
+			Assert.assertEquals(binary.maxValue, answer);
 			
 			// test all zero
 			getBits(binary,allZero);
 			isBitSet(binary,allZero);
 			
-			// text all one
+			// test all one
 			binary = new Binary(nobits,binary.maxValue);
 			getBits(binary,allOne);
 			isBitSet(binary,allOne);			
@@ -65,18 +69,26 @@ package flexUnitTests
 				Assert.assertEquals(binary.value, 0);
 			}
 			
+			var value:uint = 0;
+			
 			// test setting bits on zero binary
 			for (i = 0; i < binary.noBits; i++) {
 				binary = new Binary(nobits,0);
 				binary.setBit(i);
-				Assert.assertEquals(binary.value, 1 << i);
+				value = (1 << i);
+				Assert.assertEquals(binary.value, value);
 			}
 			
 			// test setting bits one after the other
+			value = 0;
 			binary = new Binary(nobits,0);
 			for (i = 0; i < binary.noBits; i++) {		
 				binary.setBit(i);
-				Assert.assertEquals(binary.value, binary.maxValue >> (binary.noBits-i-1));
+				value = (1 << (i+1)) - 1;
+				if (i == 31) {
+					value = uint(-1); // bit calc above overflows when checking last bit
+				}
+				Assert.assertEquals(binary.value, value);
 			}				
 		}
 		

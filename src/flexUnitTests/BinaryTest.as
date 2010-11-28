@@ -58,8 +58,8 @@ package flexUnitTests
 		public function largeBitLength():void {			
 			testBits(16);
 			binarys(16);
-			testBits(30); // largest currently supported
-			binarys(30);
+			testBits(32); // largest currently supported
+			binarys(32);
 		}
 
 
