@@ -97,7 +97,7 @@ package flexUnitTests
 			Assert.assertEquals(binary.value, 0);	
 			
 			// test -1
-			binary.value = -1;
+			binary.value = uint(-1);
 			Assert.assertEquals(binary.value, binary.maxValue);	// two's complement
 			Assert.assertEquals(binary.toDec(), -1); // two's complement
 			Assert.assertEquals(binary.toString(), binary.maxValue.toString(16));				
